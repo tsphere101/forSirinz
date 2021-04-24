@@ -48,3 +48,18 @@ class SevenSegment {
     /* Write number from the array for specific amount of the digit */
     void writeNumberFromArray(int numbers[] ,int amount) {const int time_delay = 4;for(int i = 0 ; i< amount ; i++ ) {this->writeNumberAtDigit(numbers[i],i+1);delay(time_delay);}}
 };
+
+int sevsegPin[] = {11, 10, 9, 8, 7, 6, 5, A0, A1, A2, A3};
+SevenSegment sevseg(sevsegPin, false);
+void setup() {
+  Serial.println(sevseg.getSegmentPin()[1]);
+}
+
+int numbersToWrite1[1] = {2};
+int numbersToWrite2[2] = {2,0};
+int numbersToWrite3[3] = {2,0,0};
+int numbersToWrite4[4] = {2,0,0,2};
+
+void loop() {
+  sevseg.writeNumberFromArray(numbersToWrite4,4);
+}
