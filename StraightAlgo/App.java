@@ -65,32 +65,35 @@ public class App {
 
     public static int hasStraight(ArrayList<Integer> arr) {
 
+        /* Sort before matching */
         Collections.sort(arr);
 
         boolean continuity = false;
+
+        /*
+         * Straight count will track the amount of pair which are consequently match ex.
+         * if straightCount is 3 -> means the amount of card has straight is 4.
+         */
         int straightCount = 0;
+
+        /* the amount of set that are being straight */
         int amountOfMatched = 0;
 
-        System.out.println("ARRAY SIZE::" + arr.size());
-
         for (int i = 0; i < arr.size() - 1; i++) {
-            System.out.println("INDEX::"+i + " VALUE::"+arr.get(i));
             if (arr.get(i + 1) - arr.get(i) == 1 && i != arr.size() - 2) {
+                /* If the next number is more than the current number for 1 (Sequencely) */
                 continuity = true;
-                straightCount++;
-                System.out.println("STRAIGHTCOUNT::"+straightCount);
+                straightCount++; /* track amount of straight */
             } else { /* No more continue */
                 if (continuity == true) {
                     if (straightCount >= 2) {
-                        // They are Straight
-                        System.out.println("THEY ARE STRAIGHT");
+                        /* They are straighted */
                         amountOfMatched++;
-                        System.out.println("AMOUNTOFMATCHED ADDED");
                         straightCount = 0;
                     } else {
-                        straightCount = 0; // Not continue and straight count is not more than 2
+                        straightCount = 0; /* reset count back to 0 */
                     }
-                    continuity = false;
+                    continuity = false; /* Not continue. */
                 }
 
             }
@@ -109,37 +112,32 @@ public class App {
 
         int amount_of_straight_matched = hasStraight(arr);
         for (int i = 0; i < amount_of_straight_matched; i++) {
+            /* pre-create instance of the ArrayList<Integer> in the result ArrayList */
             result.add(new ArrayList<Integer>());
         }
+
+        /* Index of sub array in the result array */
         int subArrayIndex = 0;
         boolean continuity = false;
         int straightCount = 0;
 
-        System.out.println("SIZEOFARRAY::" + arr.size());
-
         for (int i = 0; i < arr.size() - 1; i++) {
-
-            System.out.println("StraightCount::" + straightCount);
-            System.out.println("i::" + i + "VALUE::" + arr.get(i));
-
             if (arr.get(i + 1) - arr.get(i) == 1 && i != arr.size() - 2) {
+                /* If the next number is more than the current number for 1 (Sequencely) */
                 continuity = true;
                 straightCount++;
             } else { /* No more continue */
-
-                /* */
-                if (arr.size() - 2 == i && continuity == true) {
+                if (continuity == true && arr.size() - 2 == i) {
+                    /* case of the last 2 index of the array */
                     if (arr.get(arr.size() - 1) - arr.get(arr.size() - 2) == 1) {
+                        /* They are straight */
                         straightCount++;
-                        System.out.println("ADDITIONAL ADDED STRAIGHTCOUNT::" + straightCount);
                         i++;
                     }
                 }
-                /* */
                 if (continuity == true) {
                     if (straightCount >= 2) {
-                        // They are StraightFlush
-                        System.out.println("THEY ARE STRAIGHT");
+                        /* They are straight */
                         for (int k = 0; k < straightCount + 1; k++) {
                             /* Add index number from here until previous ex. 4 5 6 -> adding : 6 5 4 */
                             result.get(subArrayIndex).add(i - k);
@@ -149,7 +147,7 @@ public class App {
                         continuity = false;
                         straightCount = 0;
                     } else {
-                        straightCount = 0; // Not continue and straight count is not more than 2
+                        straightCount = 0; /* Not continue and straight count is not more than 2 */
                     }
                     continuity = false;
                 }
