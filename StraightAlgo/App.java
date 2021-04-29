@@ -42,7 +42,8 @@ public class App {
         arr4.add(7);
         arr4.add(13);
         arr4.add(12);
-        arr4.add(11);
+        arr4.add(10);
+        arr4.add(9);
 
         /* Sorting array */
         Collections.sort(arr1);
@@ -50,19 +51,15 @@ public class App {
         Collections.sort(arr3);
         Collections.sort(arr4);
 
-
         /* Print the array */
         System.out.println(arr4);
-
 
         // System.out.println("arr1 has stf : " + getStraightMatchedIndex(arr1));
         // System.out.println("arr2 has stf : " + getStraightMatchedIndex(arr2));
         // System.out.println("arr3 has stf : " + getStraightMatchedIndex(arr3));
 
-
-
+        // System.out.println("arr4 has stf amount :: " + hasStraight(arr4));
         System.out.println("arr4 has stf : " + getStraightMatchedIndex(arr4));
-
 
     }
 
@@ -74,15 +71,22 @@ public class App {
         int straightCount = 0;
         int amountOfMatched = 0;
 
+        System.out.println("ARRAY SIZE::" + arr.size());
+
         for (int i = 0; i < arr.size() - 1; i++) {
+            System.out.println("INDEX::"+i + " VALUE::"+arr.get(i));
             if (arr.get(i + 1) - arr.get(i) == 1 && i != arr.size() - 2) {
                 continuity = true;
                 straightCount++;
+                System.out.println("STRAIGHTCOUNT::"+straightCount);
             } else { /* No more continue */
                 if (continuity == true) {
                     if (straightCount >= 2) {
-                        // They are StraightFlush
+                        // They are Straight
+                        System.out.println("THEY ARE STRAIGHT");
                         amountOfMatched++;
+                        System.out.println("AMOUNTOFMATCHED ADDED");
+                        straightCount = 0;
                     } else {
                         straightCount = 0; // Not continue and straight count is not more than 2
                     }
