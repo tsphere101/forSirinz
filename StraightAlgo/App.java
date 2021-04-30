@@ -68,7 +68,7 @@ public class App {
         /* Sort before matching */
         Collections.sort(arr);
 
-        boolean continuity = false;
+        boolean isContinue = false;
 
         /*
          * Straight count will track the amount of pair which are consequently match ex.
@@ -82,10 +82,10 @@ public class App {
         for (int i = 0; i < arr.size() - 1; i++) {
             if (arr.get(i + 1) - arr.get(i) == 1 && i != arr.size() - 2) {
                 /* If the next number is more than the current number for 1 (Sequencely) */
-                continuity = true;
+                isContinue = true;
                 straightCount++; /* track amount of straight */
             } else { /* No more continue */
-                if (continuity == true) {
+                if (isContinue == true) {
                     if (straightCount >= 2) {
                         /* They are straighted */
                         amountOfMatched++;
@@ -93,7 +93,7 @@ public class App {
                     } else {
                         straightCount = 0; /* reset count back to 0 */
                     }
-                    continuity = false; /* Not continue. */
+                    isContinue = false; /* Not continue. */
                 }
 
             }
