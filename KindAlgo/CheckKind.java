@@ -19,6 +19,7 @@ public class CheckKind {
         System.out.println(arr1);
 
         System.out.println("HAS KIND::" + hasKind(arr1));
+        System.out.println("AMOUNT OF KIND::" + getAmountOfKind(arr1));
 
     }
 
@@ -55,6 +56,34 @@ public class CheckKind {
         }
 
         return (result.isEmpty()) ? null : result;
+
+    }
+
+    public static int getAmountOfKind(ArrayList<Integer> arr) {
+        Collections.sort(arr);
+
+        int amountOfKind = 0;
+        int kindCount = 0;
+        boolean isContinue = false;
+
+        for (int i = 0; i < arr.size() - 1; i++) {
+            if (arr.get(i) == arr.get(i + 1)) {
+                kindCount++;
+                isContinue = true;
+            } else {
+                /* No more continue. */
+                if (isContinue && kindCount >= 2) {
+                    /* They are kind. */
+                    amountOfKind++;
+                }
+
+                isContinue = false;
+                kindCount = 0;
+            }
+
+        }
+
+        return amountOfKind;
 
     }
 
