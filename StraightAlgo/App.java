@@ -1,5 +1,5 @@
 import java.util.Collections;
-
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class App {
@@ -10,40 +10,13 @@ public class App {
         ArrayList<Integer> arr3 = new ArrayList<Integer>();
         ArrayList<Integer> arr4 = new ArrayList<Integer>();
 
-        arr1.add(9);
-        arr1.add(1);
-        arr1.add(2);
-        arr1.add(5);
-        arr1.add(6);
+        arr1.addAll(Arrays.asList(9, 1, 2, 5, 6));
 
-        arr2.add(1);
-        arr2.add(4);
-        arr2.add(5);
-        arr2.add(6);
-        arr2.add(9);
+        arr2.addAll(Arrays.asList(1, 4, 5, 6, 9));
 
-        arr3.add(1);
-        arr3.add(2);
-        arr3.add(3);
-        arr3.add(5);
-        arr3.add(6);
-        arr3.add(7);
-        arr3.add(9);
-        arr3.add(10);
-        arr3.add(11);
-        arr3.add(12);
-        arr3.add(13);
+        arr3.addAll(Arrays.asList(1, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13));
 
-        arr4.add(1);
-        arr4.add(2);
-        arr4.add(4);
-        arr4.add(5);
-        arr4.add(6);
-        arr4.add(7);
-        arr4.add(13);
-        arr4.add(12);
-        arr4.add(10);
-        arr4.add(9);
+        arr4.addAll(Arrays.asList(1, 2, 4, 5, 6, 7, 9, 10, 12, 13));
 
         /* Sorting array */
         Collections.sort(arr1);
@@ -59,7 +32,7 @@ public class App {
         // System.out.println("arr3 has stf : " + getStraightMatchedIndex(arr3));
 
         // System.out.println("arr4 has stf amount :: " + hasStraight(arr4));
-        System.out.println("arr4 has stf : " + getStraightMatchedIndex(arr4));
+        System.out.println("arr4 HAS STRAIGHT : " + getStraightMatchedIndex(arr4));
 
     }
 
@@ -102,22 +75,12 @@ public class App {
     }
 
     public static ArrayList<ArrayList<Integer>> getStraightMatchedIndex(ArrayList<Integer> arr) {
-        if (hasStraight(arr) == 0)
-            /* IF the array has no straight */
-            return null;
 
         Collections.sort(arr);
 
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 
-        int amount_of_straight_matched = hasStraight(arr);
-        for (int i = 0; i < amount_of_straight_matched; i++) {
-            /* pre-create instance of the ArrayList<Integer> in the result ArrayList */
-            result.add(new ArrayList<Integer>());
-        }
-
-        /* Index of sub array in the result array */
-        int subArrayIndex = 0;
+        int indexOfSubArray = 0;
         boolean continuity = false;
         int straightCount = 0;
 
@@ -138,12 +101,13 @@ public class App {
                 if (continuity == true) {
                     if (straightCount >= 2) {
                         /* They are straight */
+                        result.add(new ArrayList<Integer>());
                         for (int k = 0; k < straightCount + 1; k++) {
                             /* Add index number from here until previous ex. 4 5 6 -> adding : 6 5 4 */
-                            result.get(subArrayIndex).add(i - k);
+                            result.get(indexOfSubArray).add(i - k);
                         }
-                        Collections.sort(result.get(subArrayIndex)); /* Sort back to 4 5 6 */
-                        subArrayIndex++;
+                        Collections.sort(result.get(indexOfSubArray)); /* Sort back to 4 5 6 */
+                        indexOfSubArray++;
                         continuity = false;
                         straightCount = 0;
                     } else {
@@ -154,7 +118,8 @@ public class App {
 
             }
         }
-        return result;
+
+        return (result.isEmpty()) ? null : result;
     }
 
 }
