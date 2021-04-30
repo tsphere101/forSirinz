@@ -47,4 +47,6 @@ class SevenSegment {
     void writeNumberAtDigit(int number , int digit) {this->selectDigit(digit);this->drawNumber(number);}
     /* Write number from the array for specific amount of the digit */
     void writeNumberFromArray(int numbers[] ,int amount) {const int time_delay = 4;for(int i = 0 ; i< amount ; i++ ) {this->writeNumberAtDigit(numbers[i],i+1);delay(time_delay);}}
+    /* Set Sevensegment to display nothing */
+    void blank() {this->drawNumber(-1);}
 };
