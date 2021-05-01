@@ -16,7 +16,7 @@ public class App {
 
         arr3.addAll(Arrays.asList(1, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13));
 
-        arr4.addAll(Arrays.asList(1, 2, 4, 5, 6, 7, 9, 10, 12, 13));
+        arr4.addAll(Arrays.asList(1, 2, 4, 5, 6, 7, 9, 11, 12, 13));
 
         /* Sorting array */
         Collections.sort(arr1);
@@ -32,11 +32,11 @@ public class App {
         // System.out.println("arr3 has stf : " + getStraightMatchedIndex(arr3));
 
         // System.out.println("arr4 has stf amount :: " + hasStraight(arr4));
-        System.out.println("arr4 HAS STRAIGHT : " + getStraightMatchedIndex(arr4));
+        System.out.println("arr4 HAS STRAIGHT : " + getStraightIndex(arr4));
 
     }
 
-    public static int hasStraight(ArrayList<Integer> arr) {
+    public static int getStraightAmount(ArrayList<Integer> arr) {
 
         /* Sort before matching */
         Collections.sort(arr);
@@ -74,7 +74,7 @@ public class App {
         return amountOfMatched;
     }
 
-    public static ArrayList<ArrayList<Integer>> getStraightMatchedIndex(ArrayList<Integer> arr) {
+    public static ArrayList<ArrayList<Integer>> getStraightIndex(ArrayList<Integer> arr) {
 
         Collections.sort(arr);
 
