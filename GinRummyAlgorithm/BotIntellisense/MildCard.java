@@ -23,6 +23,10 @@ public class MildCard implements Comparable {
         return this.getValue().compareTo(((MildCard) o).getValue());
     }
 
+    @Override
+    public String toString() {
+        return "value:" + this.getValue() + " suit:" + this.getSuit();
+    }
 
 
 }
