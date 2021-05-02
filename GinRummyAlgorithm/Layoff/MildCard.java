@@ -18,8 +18,8 @@ public class MildCard implements Comparable {
         return value;
     }
 
-    public Integer getScore() {
-        Integer score = 0;
+    public int getScore() {
+        int score = 0;
         if (this.getValue() <= 10)
             score = this.getValue();
         else if (this.getValue() > 10)

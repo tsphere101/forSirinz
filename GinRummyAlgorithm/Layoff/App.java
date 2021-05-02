@@ -110,6 +110,7 @@ public class App {
         ArrayList<MildCard> straight_diamond = new ArrayList<MildCard>();
         ArrayList<MildCard> straight_spade = new ArrayList<MildCard>();
 
+        System.out.println("STRAIGHTLIST::SIZE()::" + straightList.size());
         for (int i = 0; i < straightList.size(); i++) {
             if (straightList.get(i).getSuit().equals("c")) {
                 straight_clubs.add(straightList.get(i));
@@ -122,6 +123,10 @@ public class App {
             }
         }
         /* FINISHED SEPARATE CARDS IN THEIR OWN SUIT */
+        System.out.println("xSTRAIGHT_CLUBS::SIZE()::" + straight_clubs.size());
+        System.out.println("xSTRAIGHT_HEART::SIZE()::" + straight_heart.size());
+        System.out.println("xSTRAIGHT_DIAMODN::SIZE()::" + straight_diamond.size());
+        System.out.println("xSTRAIGHT_SPADE::SIZE()::" + straight_spade.size());
 
         /**
          * Convert each suit list to be ArrayList<Integer> in order to be checked in
@@ -137,29 +142,34 @@ public class App {
          * straight_clubs_value
          */
         for (int i = 0; i < straight_clubs.size(); i++) {
-            straight_clubs_value.add(straight_clubs.get(i).getValue());
+            straight_clubs_value.add(Integer.valueOf(straight_clubs.get(i).getValue()));
         }
         /*
          * Converting ArrayList<MildClub> straight_heart to ArrayList<Integer>
          * straight_heart_value
          */
-        for (int i = 0; i < straight_clubs.size(); i++) {
-            straight_heart_value.add(straight_heart.get(i).getValue());
+        for (int i = 0; i < straight_heart.size(); i++) {
+            straight_heart_value.add(Integer.valueOf(straight_heart.get(i).getValue()));
         }
         /*
          * Converting ArrayList<MildClub> straight_diamond to ArrayList<Integer>
          * straight_diamond_value
          */
-        for (int i = 0; i < straight_clubs.size(); i++) {
-            straight_diamond_value.add(straight_diamond.get(i).getValue());
+        for (int i = 0; i < straight_diamond.size(); i++) {
+            straight_diamond_value.add(Integer.valueOf(straight_diamond.get(i).getValue()));
         }
         /*
          * Converting ArrayList<MildClub> straight_spade to ArrayList<Integer>
          * straight_spade_value
          */
-        for (int i = 0; i < straight_clubs.size(); i++) {
-            straight_spade_value.add(straight_spade.get(i).getValue());
+        for (int i = 0; i < straight_spade.size(); i++) {
+            straight_spade_value.add(Integer.valueOf(straight_spade.get(i).getValue()));
         }
+
+        System.out.println(straight_clubs_value);
+        System.out.println(straight_heart_value);
+        System.out.println(straight_diamond_value);
+        System.out.println(straight_spade_value);
 
         /* Check if Straight hadn't been occured */
         ArrayList<ArrayList<Integer>> club_straight_index = getStraightIndex(straight_clubs_value);
@@ -187,14 +197,16 @@ public class App {
         int result_score = 0;
 
         /* check if can be banked in kind. */
+        System.out.println("W(TSPEHRE)" + kindList.get(getKindIndex(kindList_value).get(0).get(0)).getValue());
+
         for (int i = 0; i < deadwoodList.size(); i++) {
 
-            if (getKindIndex(kindList_value).get(0).get(0) == deadwoodList.get(i).getValue()) {
+            System.out.println("GETSCORE()::" + deadwoodList.get(i).getScore());
+            if (kindList.get(getKindIndex(kindList_value).get(0).get(0)).getValue() == deadwoodList.get(i).getValue()) {
                 /* if matched, deadwoodlist.remove(i) */
                 /* result_score = result_score + deadwoodLlist.getScore() */
+                System.out.println("GETSCORE()::" + deadwoodList.get(i).getScore());
                 result_score += deadwoodList.remove(i).getScore();
-
-                System.out.println("LAYOFF_SCORE_IS::" + result_score);
 
             }
 
@@ -205,7 +217,7 @@ public class App {
         /* check if can be banked in straight */
 
         // Clubs straight check , check if can be banked in straight club.
-        if (!club_straight_index.isEmpty() && club_straight_index != null) {
+        if (club_straight_index != null) {
             /* has straight occured in club */
 
             Collections.sort(straight_clubs);
@@ -256,9 +268,10 @@ public class App {
         }
 
         // Heart straight check , check if can be banked in straight heart.
-        if (!heart_straight_index.isEmpty() && heart_straight_index != null) {
+        if (heart_straight_index != null) {
             /* has straight occured in heart */
-
+            System.out.println("HEART_STRAIGHT_INDEX is not null");
+            System.out.println("HEART_STRAIGHT_INDEX::SIZE::" + heart_straight_index.size());
             Collections.sort(straight_heart);
 
             for (int j = 0; j < heart_straight_index.size(); j++) {
@@ -269,7 +282,7 @@ public class App {
                     /* check if it can be place in the bottom */
                     if ((straight_heart.get(heart_straight_index.get(j).get(0))
                             .getValue() == deadwoodList.get(q).getValue() + 1)
-                            && deadwoodList.get(q).getSuit().equals("c")) {
+                            && deadwoodList.get(q).getSuit().equals("h")) {
                         /* can be placed in the bottom of the straighted card */
                         straight_heart.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
                         straight_heart_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
@@ -307,7 +320,7 @@ public class App {
         }
 
         // Diamond straight check , check if can be banked in straight diamond.
-        if (!diamond_straight_index.isEmpty() && diamond_straight_index != null) {
+        if (diamond_straight_index != null) {
             /* has straight occured in diamond */
 
             Collections.sort(straight_diamond);
@@ -320,7 +333,7 @@ public class App {
                     /* check if it can be place in the bottom */
                     if ((straight_diamond.get(diamond_straight_index.get(j).get(0))
                             .getValue() == deadwoodList.get(q).getValue() + 1)
-                            && deadwoodList.get(q).getSuit().equals("c")) {
+                            && deadwoodList.get(q).getSuit().equals("d")) {
                         /* can be placed in the bottom of the straighted card */
                         straight_diamond.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
                         straight_diamond_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
@@ -359,7 +372,7 @@ public class App {
         }
 
         // spade straight check , check if can be banked in straight spade.
-        if (!spade_straight_index.isEmpty() && spade_straight_index != null) {
+        if (spade_straight_index != null) {
             /* has straight occured in spade */
 
             Collections.sort(straight_spade);
@@ -372,7 +385,7 @@ public class App {
                     /* check if it can be place in the bottom */
                     if ((straight_spade.get(spade_straight_index.get(j).get(0))
                             .getValue() == deadwoodList.get(q).getValue() + 1)
-                            && deadwoodList.get(q).getSuit().equals("c")) {
+                            && deadwoodList.get(q).getSuit().equals("s")) {
                         /* can be placed in the bottom of the straighted card */
                         straight_spade.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
                         straight_spade_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
