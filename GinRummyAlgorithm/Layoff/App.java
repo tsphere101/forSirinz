@@ -186,110 +186,207 @@ public class App {
         System.out.println("LAYOFF_SCORE_IS::" + result_score);
 
         /* check if can be banked in straight */
-        for (int i = 0; i < deadwoodList.size(); i++) {
 
-            // Clubs straight check
-            if (!club_straight_index.isEmpty() && club_straight_index != null) {
-                /* has straight occured in club */
+        // Clubs straight check , check if can be banked in straight club.
+        if (!club_straight_index.isEmpty() && club_straight_index != null) {
+            /* has straight occured in club */
 
-                Collections.sort(straight_clubs);
+            Collections.sort(straight_clubs);
 
-                for (int j = 0; j < club_straight_index.size(); j++) {
-                    boolean isCombo = true;
-                    int q = 0;
-                    while (isCombo && q < deadwoodList.size())
+            for (int j = 0; j < club_straight_index.size(); j++) {
+                boolean isCombo = true;
+                int q = 0;
+                while (isCombo && q < deadwoodList.size())
 
-                        /* check if it can be place in the bottom */
-                        if ((straight_clubs.get(club_straight_index.get(j).get(0))
-                                .getValue() == deadwoodList.get(q).getValue() + 1)
-                                && deadwoodList.get(q).getSuit().equals("c")) {
-                            /* can be placed in the bottom of the straighted card */
-                            result_score += deadwoodList.remove(q).getScore();
-                            isCombo = true;
-                            q = 0;
-                        }
-
-                        /* check if it can be placed in the upper */
-                        else if (straight_clubs
-                                .get(club_straight_index.get(j).get(club_straight_index.get(j).size() - 1))
-                                .getValue() == deadwoodList.get(q).getValue() - 1) {
-                            /* can be placed at the upper of the straighted card */
-                            result_score += deadwoodList.remove(q).getScore();
-                            isCombo = true;
-                            q = 0;
-                        }
-
-                        else {
-                            /* No more straight combo can be placed */
-                            isCombo = false;
-                            q++;
-
-                        }
-
-                }
-
-            }
-
-            // Heart straight check
-            if (!heart_straight_index.isEmpty() && heart_straight_index != null) {
-                /* has straight occured in heart */
-                Collections.sort(straight_heart);
-                for (int j = 0; j < heart_straight_index.size(); j++) {
                     /* check if it can be place in the bottom */
-                    if (straight_heart.get(heart_straight_index.get(j).get(0))
-                            .getValue() == deadwoodList.get(i).getValue() + 1) {
+                    if ((straight_clubs.get(club_straight_index.get(j).get(0))
+                            .getValue() == deadwoodList.get(q).getValue() + 1)
+                            && deadwoodList.get(q).getSuit().equals("c")) {
                         /* can be placed in the bottom of the straighted card */
-                        result_score += deadwoodList.remove(i).getScore();
+                        straight_clubs.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
+                        straight_clubs_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
+                        Collections.sort(straight_clubs);
+                        Collections.sort(straight_clubs_value);
+                        club_straight_index = getStraightIndex(straight_clubs_value); // recall the straight index.
+                        result_score += deadwoodList.remove(q).getScore(); // add score and remove.
+                        isCombo = true;
+                        q = 0;
                     }
 
                     /* check if it can be placed in the upper */
-                    if (straight_heart.get(heart_straight_index.get(j).get(heart_straight_index.get(j).size() - 1))
-                            .getValue() == deadwoodList.get(i).getValue() - 1) {
-                        result_score += deadwoodList.remove(i).getScore();
+                    else if (straight_clubs.get(club_straight_index.get(j).get(club_straight_index.get(j).size() - 1))
+                            .getValue() == deadwoodList.get(q).getValue() - 1) {
+                        /* can be placed at the upper of the straighted card */
+                        straight_clubs.add(deadwoodList.get(q));
+                        straight_clubs_value.add(deadwoodList.get(q).getValue());
+                        Collections.sort(straight_clubs);
+                        Collections.sort(straight_clubs_value);
+                        club_straight_index = getStraightIndex(straight_clubs_value);
+                        result_score += deadwoodList.remove(q).getScore();
+                        isCombo = true;
+                        q = 0;
                     }
 
-                }
+                    else {
+                        /* No more straight combo can be placed */
+                        isCombo = false;
+                        q++;
+
+                    }
+
             }
-            // Diamond straight check
-            if (!diamond_straight_index.isEmpty() && diamond_straight_index != null) {
-                /* has straight occured in diamond */
-                Collections.sort(straight_diamond);
-                for (int j = 0; j < diamond_straight_index.size(); j++) {
+
+        }
+
+        // Heart straight check , check if can be banked in straight heart.
+        if (!heart_straight_index.isEmpty() && heart_straight_index != null) {
+            /* has straight occured in heart*/
+
+            Collections.sort(straight_heart);
+
+            for (int j = 0; j < heart_straight_index.size(); j++) {
+                boolean isCombo = true;
+                int q = 0;
+                while (isCombo && q < deadwoodList.size())
+
                     /* check if it can be place in the bottom */
-                    if (straight_diamond.get(diamond_straight_index.get(j).get(0))
-                            .getValue() == deadwoodList.get(i).getValue() + 1) {
+                    if ((straight_heart.get(heart_straight_index.get(j).get(0))
+                            .getValue() == deadwoodList.get(q).getValue() + 1)
+                            && deadwoodList.get(q).getSuit().equals("c")) {
                         /* can be placed in the bottom of the straighted card */
-                        result_score += deadwoodList.remove(i).getScore();
+                        straight_heart.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
+                        straight_heart_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
+                        Collections.sort(straight_heart);
+                        Collections.sort(straight_heart_value);
+                        heart_straight_index = getStraightIndex(straight_heart_value); // recall the straight index.
+                        result_score += deadwoodList.remove(q).getScore(); // add score and remove.
+                        isCombo = true;
+                        q = 0;
                     }
 
                     /* check if it can be placed in the upper */
-                    if (straight_diamond
-                            .get(diamond_straight_index.get(j).get(diamond_straight_index.get(j).size() - 1))
-                            .getValue() == deadwoodList.get(i).getValue() - 1) {
-                        result_score += deadwoodList.remove(i).getScore();
+                    else if (straight_heart.get(heart_straight_index.get(j).get(heart_straight_index.get(j).size() - 1))
+                            .getValue() == deadwoodList.get(q).getValue() - 1) {
+                        /* can be placed at the upper of the straighted card */
+                        straight_heart.add(deadwoodList.get(q));
+                        straight_heart_value.add(deadwoodList.get(q).getValue());
+                        Collections.sort(straight_heart);
+                        Collections.sort(straight_heart_value);
+                        heart_straight_index = getStraightIndex(straight_heart_value);
+                        result_score += deadwoodList.remove(q).getScore();
+                        isCombo = true;
+                        q = 0;
                     }
 
-                }
+                    else {
+                        /* No more straight combo can be placed */
+                        isCombo = false;
+                        q++;
+
+                    }
+
             }
-            // Spade straight check
-            if (!spade_straight_index.isEmpty() && spade_straight_index != null) {
-                /* has straight occured in spade */
-                Collections.sort(straight_spade);
-                for (int j = 0; j < spade_straight_index.size(); j++) {
+
+        }
+
+        // Diamond straight check , check if can be banked in straight diamond.
+        if (!diamond_straight_index.isEmpty() && diamond_straight_index != null) {
+            /* has straight occured in diamond*/
+
+            Collections.sort(straight_diamond);
+
+            for (int j = 0; j < diamond_straight_index.size(); j++) {
+                boolean isCombo = true;
+                int q = 0;
+                while (isCombo && q < deadwoodList.size())
+
                     /* check if it can be place in the bottom */
-                    if (straight_spade.get(spade_straight_index.get(j).get(0))
-                            .getValue() == deadwoodList.get(i).getValue() + 1) {
+                    if ((straight_diamond.get(diamond_straight_index.get(j).get(0))
+                            .getValue() == deadwoodList.get(q).getValue() + 1)
+                            && deadwoodList.get(q).getSuit().equals("c")) {
                         /* can be placed in the bottom of the straighted card */
-                        result_score += deadwoodList.remove(i).getScore();
+                        straight_diamond.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
+                        straight_diamond_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
+                        Collections.sort(straight_diamond);
+                        Collections.sort(straight_diamond_value);
+                        diamond_straight_index = getStraightIndex(straight_diamond_value); // recall the straight index.
+                        result_score += deadwoodList.remove(q).getScore(); // add score and remove.
+                        isCombo = true;
+                        q = 0;
                     }
 
                     /* check if it can be placed in the upper */
-                    if (straight_spade.get(spade_straight_index.get(j).get(spade_straight_index.get(j).size() - 1))
-                            .getValue() == deadwoodList.get(i).getValue() - 1) {
-                        result_score += deadwoodList.remove(i).getScore();
+                    else if (straight_diamond.get(diamond_straight_index.get(j).get(diamond_straight_index.get(j).size() - 1))
+                            .getValue() == deadwoodList.get(q).getValue() - 1) {
+                        /* can be placed at the upper of the straighted card */
+                        straight_diamond.add(deadwoodList.get(q));
+                        straight_diamond_value.add(deadwoodList.get(q).getValue());
+                        Collections.sort(straight_diamond);
+                        Collections.sort(straight_diamond_value);
+                        diamond_straight_index = getStraightIndex(straight_diamond_value);
+                        result_score += deadwoodList.remove(q).getScore();
+                        isCombo = true;
+                        q = 0;
                     }
 
-                }
+                    else {
+                        /* No more straight combo can be placed */
+                        isCombo = false;
+                        q++;
+
+                    }
+
+            }
+
+        }
+
+        // spade straight check , check if can be banked in straight spade.
+        if (!spade_straight_index.isEmpty() && spade_straight_index != null) {
+            /* has straight occured in spade*/
+
+            Collections.sort(straight_spade);
+
+            for (int j = 0; j < spade_straight_index.size(); j++) {
+                boolean isCombo = true;
+                int q = 0;
+                while (isCombo && q < deadwoodList.size())
+
+                    /* check if it can be place in the bottom */
+                    if ((straight_spade.get(spade_straight_index.get(j).get(0))
+                            .getValue() == deadwoodList.get(q).getValue() + 1)
+                            && deadwoodList.get(q).getSuit().equals("c")) {
+                        /* can be placed in the bottom of the straighted card */
+                        straight_spade.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
+                        straight_spade_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
+                        Collections.sort(straight_spade);
+                        Collections.sort(straight_spade_value);
+                        spade_straight_index = getStraightIndex(straight_spade_value); // recall the straight index.
+                        result_score += deadwoodList.remove(q).getScore(); // add score and remove.
+                        isCombo = true;
+                        q = 0;
+                    }
+
+                    /* check if it can be placed in the upper */
+                    else if (straight_spade.get(spade_straight_index.get(j).get(spade_straight_index.get(j).size() - 1))
+                            .getValue() == deadwoodList.get(q).getValue() - 1) {
+                        /* can be placed at the upper of the straighted card */
+                        straight_spade.add(deadwoodList.get(q));
+                        straight_spade_value.add(deadwoodList.get(q).getValue());
+                        Collections.sort(straight_spade);
+                        Collections.sort(straight_spade_value);
+                        spade_straight_index = getStraightIndex(straight_spade_value);
+                        result_score += deadwoodList.remove(q).getScore();
+                        isCombo = true;
+                        q = 0;
+                    }
+
+                    else {
+                        /* No more straight combo can be placed */
+                        isCombo = false;
+                        q++;
+
+                    }
+
             }
 
         }
