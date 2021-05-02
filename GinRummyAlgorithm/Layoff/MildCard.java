@@ -18,6 +18,15 @@ public class MildCard implements Comparable {
         return value;
     }
 
+    public Integer getScore() {
+        Integer score = 0;
+        if (this.getValue() <= 10)
+            score = this.getValue();
+        else if (this.getValue() > 10)
+            score = 10;
+        return score;
+    }
+
     @Override
     public int compareTo(Object o) {
         return this.getValue().compareTo(((MildCard) o).getValue());
@@ -27,6 +36,5 @@ public class MildCard implements Comparable {
     public String toString() {
         return "value:" + this.getValue() + " suit:" + this.getSuit();
     }
-
 
 }
