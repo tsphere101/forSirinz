@@ -8,6 +8,22 @@ public class App {
 
         /* TEST CASE */
 
+        ArrayList<String> listOfKind_string = new ArrayList<String>();
+        listOfKind_string.add("1s");
+        listOfKind_string.add("1d");
+        listOfKind_string.add("1h");
+
+        ArrayList<String> listOfStraight_string = new ArrayList<String>();
+        listOfStraight_string.add("4h");
+        listOfStraight_string.add("5h");
+        listOfStraight_string.add("6h");
+
+        ArrayList<String> listOfDeadwood_string = new ArrayList<String>();
+        listOfDeadwood_string.add("1d");
+        listOfDeadwood_string.add("3h");
+
+        System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
+
     }
 
     public static int layoffScore(ArrayList<String> listOfKind_string, ArrayList<String> listOfStraight_string,
@@ -151,11 +167,12 @@ public class App {
         ArrayList<ArrayList<Integer>> diamond_straight_index = getStraightIndex(straight_diamond_value);
         ArrayList<ArrayList<Integer>> spade_straight_index = getStraightIndex(straight_spade_value);
         try {
-
-            if ((club_straight_index.isEmpty() || club_straight_index == null)
-                    && (heart_straight_index.isEmpty() || heart_straight_index == null)
-                    && (diamond_straight_index.isEmpty() || diamond_straight_index == null)
-                    && (spade_straight_index.isEmpty() || spade_straight_index == null)) {
+            System.out.println(club_straight_index);
+            System.out.println(heart_straight_index);
+            System.out.println(diamond_straight_index);
+            System.out.println(spade_straight_index);
+            if ((club_straight_index == null) && (heart_straight_index == null) && (diamond_straight_index == null)
+                    && (spade_straight_index == null)) {
 
                 throw new IllegalArgumentException("NO STRAIGHT OCCUR IN ANY SUIT.");
 
@@ -240,7 +257,7 @@ public class App {
 
         // Heart straight check , check if can be banked in straight heart.
         if (!heart_straight_index.isEmpty() && heart_straight_index != null) {
-            /* has straight occured in heart*/
+            /* has straight occured in heart */
 
             Collections.sort(straight_heart);
 
@@ -291,7 +308,7 @@ public class App {
 
         // Diamond straight check , check if can be banked in straight diamond.
         if (!diamond_straight_index.isEmpty() && diamond_straight_index != null) {
-            /* has straight occured in diamond*/
+            /* has straight occured in diamond */
 
             Collections.sort(straight_diamond);
 
@@ -316,7 +333,8 @@ public class App {
                     }
 
                     /* check if it can be placed in the upper */
-                    else if (straight_diamond.get(diamond_straight_index.get(j).get(diamond_straight_index.get(j).size() - 1))
+                    else if (straight_diamond
+                            .get(diamond_straight_index.get(j).get(diamond_straight_index.get(j).size() - 1))
                             .getValue() == deadwoodList.get(q).getValue() - 1) {
                         /* can be placed at the upper of the straighted card */
                         straight_diamond.add(deadwoodList.get(q));
@@ -342,7 +360,7 @@ public class App {
 
         // spade straight check , check if can be banked in straight spade.
         if (!spade_straight_index.isEmpty() && spade_straight_index != null) {
-            /* has straight occured in spade*/
+            /* has straight occured in spade */
 
             Collections.sort(straight_spade);
 
