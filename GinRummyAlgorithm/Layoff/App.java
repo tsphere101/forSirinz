@@ -11,23 +11,28 @@ public class App {
         ArrayList<String> listOfKind_string = new ArrayList<String>();
         listOfKind_string.add("1s");
         listOfKind_string.add("1d");
-        listOfKind_string.add("1h");
+        listOfKind_string.add("1d");
         listOfKind_string.add("10c");
         listOfKind_string.add("10s");
         listOfKind_string.add("10d");
 
         ArrayList<String> listOfStraight_string = new ArrayList<String>();
-        listOfStraight_string.add("5h");
-        listOfStraight_string.add("6h");
-        listOfStraight_string.add("7h");
+        listOfStraight_string.add("3s");
+        listOfStraight_string.add("4s");
+        listOfStraight_string.add("5s");
+
+        listOfStraight_string.add("ms");
+        listOfStraight_string.add("ns");
+        listOfStraight_string.add("os");
 
         ArrayList<String> listOfDeadwood_string = new ArrayList<String>();
-        listOfDeadwood_string.add("1d");
-        listOfDeadwood_string.add("3h");
-        listOfDeadwood_string.add("4h");
-        listOfDeadwood_string.add("8h");
-        listOfDeadwood_string.add("9h");
-        listOfDeadwood_string.add("10h");
+        listOfDeadwood_string.add("1s");
+        listOfDeadwood_string.add("2s");
+        listOfDeadwood_string.add("6s");
+        listOfDeadwood_string.add("7s");
+        listOfDeadwood_string.add("8s");
+        listOfDeadwood_string.add("9s");
+        listOfDeadwood_string.add("ps");
 
         System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
 
@@ -62,25 +67,74 @@ public class App {
 
         /* Conver list of kind string to ArrayList<MildCard> */
         for (int i = 0; i < listOfKind_string.size(); i++) {
-            int value = Integer.parseInt(Character.toString(listOfKind_string.get(i).charAt(0)));
-            String suit = Character.toString(listOfKind_string.get(i).charAt(1));
+
+            int value;
+            String suit = "";
+            if (Character.toString(listOfKind_string.get(i).charAt(0)).equals("m")) {
+                value = 10;
+                suit = Character.toString(listOfKind_string.get(i).charAt(1));
+            } else if (Character.toString(listOfKind_string.get(i).charAt(0)).equals("n")) {
+                value = 11;
+                suit = Character.toString(listOfKind_string.get(i).charAt(1));
+            } else if (Character.toString(listOfKind_string.get(i).charAt(0)).equals("o")) {
+                value = 12;
+                suit = Character.toString(listOfKind_string.get(i).charAt(1));
+            } else if (Character.toString(listOfKind_string.get(i).charAt(0)).equals("p")) {
+                value = 13;
+                suit = Character.toString(listOfKind_string.get(i).charAt(1));
+            } else {
+                value = Integer.parseInt(Character.toString(listOfKind_string.get(i).charAt(0)));
+                suit = Character.toString(listOfKind_string.get(i).charAt(1));
+            }
             kindList.add(new MildCard(value, suit));
         }
         Collections.sort(kindList);
 
         /* List of Straight */
         for (int i = 0; i < listOfStraight_string.size(); i++) {
-            int value = Integer.parseInt(Character.toString(listOfStraight_string.get(i).charAt(0)));
-            String suit = Character.toString(listOfStraight_string.get(i).charAt(1));
+            int value;
+            String suit = "";
+            if (Character.toString(listOfStraight_string.get(i).charAt(0)).equals("m")) {
+                value = 10;
+                suit = Character.toString(listOfStraight_string.get(i).charAt(1));
+            } else if (Character.toString(listOfStraight_string.get(i).charAt(0)).equals("n")) {
+                value = 11;
+                suit = Character.toString(listOfStraight_string.get(i).charAt(1));
+            } else if (Character.toString(listOfStraight_string.get(i).charAt(0)).equals("o")) {
+                value = 12;
+                suit = Character.toString(listOfStraight_string.get(i).charAt(1));
+            } else if (Character.toString(listOfStraight_string.get(i).charAt(0)).equals("p")) {
+                value = 13;
+                suit = Character.toString(listOfStraight_string.get(i).charAt(1));
+            } else {
+                value = Integer.parseInt(Character.toString(listOfStraight_string.get(i).charAt(0)));
+                suit = Character.toString(listOfStraight_string.get(i).charAt(1));
+            }
             straightList.add(new MildCard(value, suit));
         }
         Collections.sort(straightList);
 
         /* List of Deadwood */
         for (int i = 0; i < listOfDeadwood_string.size(); i++) {
-            int value = Integer.parseInt(Character.toString(listOfDeadwood_string.get(i).charAt(0)));
-            String suit = Character.toString(listOfDeadwood_string.get(i).charAt(1));
-            deadwoodList.add(new MildCard(value, suit));
+            int value;
+            String suit = "";
+            if (Character.toString(listOfDeadwood_string.get(i).charAt(0)).equals("m")) {
+                value = 10;
+                suit = Character.toString(listOfDeadwood_string.get(i).charAt(1));
+            } else if (Character.toString(listOfDeadwood_string.get(i).charAt(0)).equals("n")) {
+                value = 11;
+                suit = Character.toString(listOfDeadwood_string.get(i).charAt(1));
+            } else if (Character.toString(listOfDeadwood_string.get(i).charAt(0)).equals("o")) {
+                value = 12;
+                suit = Character.toString(listOfDeadwood_string.get(i).charAt(1));
+            } else if (Character.toString(listOfDeadwood_string.get(i).charAt(0)).equals("p")) {
+                value = 13;
+                suit = Character.toString(listOfDeadwood_string.get(i).charAt(1));
+            } else {
+                value = Integer.parseInt(Character.toString(listOfDeadwood_string.get(i).charAt(0)));
+                suit = Character.toString(listOfDeadwood_string.get(i).charAt(1));
+            }
+            deadwoodList.add(new MildCard(value,suit));
         }
         Collections.sort(deadwoodList);
         /* FINISHED CONVERT FROM ARRAYLIST OF STRING TO ARRAYLIST OF MILDCARD */
@@ -117,17 +171,21 @@ public class App {
         ArrayList<MildCard> straight_diamond = new ArrayList<MildCard>();
         ArrayList<MildCard> straight_spade = new ArrayList<MildCard>();
 
+        System.out.println(straightList);
         System.out.println("STRAIGHTLIST::SIZE()::" + straightList.size());
         for (int i = 0; i < straightList.size(); i++) {
             if (straightList.get(i).getSuit().equals("c")) {
                 straight_clubs.add(straightList.get(i));
             } else if (straightList.get(i).getSuit().equals("h")) {
                 straight_heart.add(straightList.get(i));
+                System.out.println("ADDED TO HEART");
+                System.out.println(straightList.get(i));
             } else if (straightList.get(i).getSuit().equals("d")) {
                 straight_diamond.add(straightList.get(i));
             } else if (straightList.get(i).getSuit().equals("s")) {
                 straight_spade.add(straightList.get(i));
             }
+            System.out.println("ITERATE");
         }
         /* FINISHED SEPARATE CARDS IN THEIR OWN SUIT */
         System.out.println("xSTRAIGHT_CLUBS::SIZE()::" + straight_clubs.size());
@@ -232,7 +290,7 @@ public class App {
             for (int j = 0; j < club_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
-                while (isCombo && q < deadwoodList.size()&& q<deadwoodList.size())
+                while (isCombo && q < deadwoodList.size() && q < deadwoodList.size())
 
                     /* check if it can be place in the bottom */
                     if ((straight_clubs.get(club_straight_index.get(j).get(0))
@@ -279,7 +337,7 @@ public class App {
             System.out.println("HEART_STRAIGHT_INDEX is not null");
             System.out.println("HEART_STRAIGHT_INDEX::SIZE::" + heart_straight_index.size());
             Collections.sort(straight_heart);
-
+            System.out.println(straight_heart);
             for (int j = 0; j < heart_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
@@ -305,6 +363,8 @@ public class App {
                     else if (straight_heart.get(heart_straight_index.get(j).get(heart_straight_index.get(j).size() - 1))
                             .getValue() == deadwoodList.get(q).getValue() - 1) {
                         /* can be placed at the upper of the straighted card */
+                        System.out.println("CAN BE PLACE AT THE UPPER OF THE STRAIGHT CARD" + deadwoodList.get(q));
+                        System.out.println("LEFT IN DEADWOOD::"+deadwoodList);
                         straight_heart.add(deadwoodList.get(q));
                         straight_heart_value.add(deadwoodList.get(q).getValue());
                         Collections.sort(straight_heart);
@@ -335,7 +395,7 @@ public class App {
             for (int j = 0; j < diamond_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
-                while (isCombo && q<straight_diamond.size()&& q < deadwoodList.size() )
+                while (isCombo && q < straight_diamond.size() && q < deadwoodList.size())
 
                     /* check if it can be place in the bottom */
                     if ((straight_diamond.get(diamond_straight_index.get(j).get(0))
@@ -386,7 +446,7 @@ public class App {
             for (int j = 0; j < spade_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
-                while (isCombo && q<straight_spade.size() && q < deadwoodList.size() )
+                while (isCombo && q < straight_spade.size() && q < deadwoodList.size())
 
                     /* check if it can be place in the bottom */
                     if ((straight_spade.get(spade_straight_index.get(j).get(0))
