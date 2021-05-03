@@ -12,15 +12,22 @@ public class App {
         listOfKind_string.add("1s");
         listOfKind_string.add("1d");
         listOfKind_string.add("1h");
+        listOfKind_string.add("10c");
+        listOfKind_string.add("10s");
+        listOfKind_string.add("10d");
 
         ArrayList<String> listOfStraight_string = new ArrayList<String>();
-        listOfStraight_string.add("4h");
         listOfStraight_string.add("5h");
         listOfStraight_string.add("6h");
+        listOfStraight_string.add("7h");
 
         ArrayList<String> listOfDeadwood_string = new ArrayList<String>();
         listOfDeadwood_string.add("1d");
         listOfDeadwood_string.add("3h");
+        listOfDeadwood_string.add("4h");
+        listOfDeadwood_string.add("8h");
+        listOfDeadwood_string.add("9h");
+        listOfDeadwood_string.add("10h");
 
         System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
 
@@ -225,7 +232,7 @@ public class App {
             for (int j = 0; j < club_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
-                while (isCombo && q < deadwoodList.size())
+                while (isCombo && q < deadwoodList.size()&& q<deadwoodList.size())
 
                     /* check if it can be place in the bottom */
                     if ((straight_clubs.get(club_straight_index.get(j).get(0))
@@ -258,7 +265,6 @@ public class App {
 
                     else {
                         /* No more straight combo can be placed */
-                        isCombo = false;
                         q++;
 
                     }
@@ -277,13 +283,14 @@ public class App {
             for (int j = 0; j < heart_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
-                while (isCombo && q < deadwoodList.size())
+                while (isCombo && q < straight_heart.size() && q < deadwoodList.size()) {
 
                     /* check if it can be place in the bottom */
                     if ((straight_heart.get(heart_straight_index.get(j).get(0))
                             .getValue() == deadwoodList.get(q).getValue() + 1)
                             && deadwoodList.get(q).getSuit().equals("h")) {
                         /* can be placed in the bottom of the straighted card */
+                        System.out.println("CAN BE PLACE IN THE BOTTOM OF THE STRAIGHT CARD" + deadwoodList.get(q));
                         straight_heart.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
                         straight_heart_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
                         Collections.sort(straight_heart);
@@ -310,10 +317,10 @@ public class App {
 
                     else {
                         /* No more straight combo can be placed */
-                        isCombo = false;
                         q++;
 
                     }
+                }
 
             }
 
@@ -328,7 +335,7 @@ public class App {
             for (int j = 0; j < diamond_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
-                while (isCombo && q < deadwoodList.size())
+                while (isCombo && q<straight_diamond.size()&& q < deadwoodList.size() )
 
                     /* check if it can be place in the bottom */
                     if ((straight_diamond.get(diamond_straight_index.get(j).get(0))
@@ -362,7 +369,6 @@ public class App {
 
                     else {
                         /* No more straight combo can be placed */
-                        isCombo = false;
                         q++;
 
                     }
@@ -380,7 +386,7 @@ public class App {
             for (int j = 0; j < spade_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
-                while (isCombo && q < deadwoodList.size())
+                while (isCombo && q<straight_spade.size() && q < deadwoodList.size() )
 
                     /* check if it can be place in the bottom */
                     if ((straight_spade.get(spade_straight_index.get(j).get(0))
@@ -413,7 +419,6 @@ public class App {
 
                     else {
                         /* No more straight combo can be placed */
-                        isCombo = false;
                         q++;
 
                     }
