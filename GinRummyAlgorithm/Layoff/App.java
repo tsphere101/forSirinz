@@ -21,9 +21,9 @@ public class App {
         listOfStraight_string.add("4s");
         listOfStraight_string.add("5s");
 
-        listOfStraight_string.add("ms");
-        listOfStraight_string.add("ns");
         listOfStraight_string.add("os");
+        listOfStraight_string.add("ns");
+        listOfStraight_string.add("ps");
 
         ArrayList<String> listOfDeadwood_string = new ArrayList<String>();
         listOfDeadwood_string.add("1s");
@@ -32,7 +32,7 @@ public class App {
         listOfDeadwood_string.add("7s");
         listOfDeadwood_string.add("8s");
         listOfDeadwood_string.add("9s");
-        listOfDeadwood_string.add("ps");
+        listOfDeadwood_string.add("ms");
 
         System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
 
