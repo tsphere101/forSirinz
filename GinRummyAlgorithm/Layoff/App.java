@@ -34,7 +34,7 @@ public class App {
         listOfDeadwood_string.add("9s");
         listOfDeadwood_string.add("ms");
 
-        System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
+        // System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
 
     }
 
@@ -171,27 +171,27 @@ public class App {
         ArrayList<MildCard> straight_diamond = new ArrayList<MildCard>();
         ArrayList<MildCard> straight_spade = new ArrayList<MildCard>();
 
-        System.out.println(straightList);
-        System.out.println("STRAIGHTLIST::SIZE()::" + straightList.size());
+        // System.out.println(straightList);
+        // System.out.println("STRAIGHTLIST::SIZE()::" + straightList.size());
         for (int i = 0; i < straightList.size(); i++) {
             if (straightList.get(i).getSuit().equals("c")) {
                 straight_clubs.add(straightList.get(i));
             } else if (straightList.get(i).getSuit().equals("h")) {
                 straight_heart.add(straightList.get(i));
-                System.out.println("ADDED TO HEART");
-                System.out.println(straightList.get(i));
+                // System.out.println("ADDED TO HEART");
+                // System.out.println(straightList.get(i));
             } else if (straightList.get(i).getSuit().equals("d")) {
                 straight_diamond.add(straightList.get(i));
             } else if (straightList.get(i).getSuit().equals("s")) {
                 straight_spade.add(straightList.get(i));
             }
-            System.out.println("ITERATE");
+            // System.out.println("ITERATE");
         }
         /* FINISHED SEPARATE CARDS IN THEIR OWN SUIT */
-        System.out.println("xSTRAIGHT_CLUBS::SIZE()::" + straight_clubs.size());
-        System.out.println("xSTRAIGHT_HEART::SIZE()::" + straight_heart.size());
-        System.out.println("xSTRAIGHT_DIAMODN::SIZE()::" + straight_diamond.size());
-        System.out.println("xSTRAIGHT_SPADE::SIZE()::" + straight_spade.size());
+        // System.out.println("xSTRAIGHT_CLUBS::SIZE()::" + straight_clubs.size());
+        // System.out.println("xSTRAIGHT_HEART::SIZE()::" + straight_heart.size());
+        // System.out.println("xSTRAIGHT_DIAMODN::SIZE()::" + straight_diamond.size());
+        // System.out.println("xSTRAIGHT_SPADE::SIZE()::" + straight_spade.size());
 
         /**
          * Convert each suit list to be ArrayList<Integer> in order to be checked in
@@ -231,10 +231,10 @@ public class App {
             straight_spade_value.add(Integer.valueOf(straight_spade.get(i).getValue()));
         }
 
-        System.out.println(straight_clubs_value);
-        System.out.println(straight_heart_value);
-        System.out.println(straight_diamond_value);
-        System.out.println(straight_spade_value);
+        // System.out.println(straight_clubs_value);
+        // System.out.println(straight_heart_value);
+        // System.out.println(straight_diamond_value);
+        // System.out.println(straight_spade_value);
 
         /* Check if Straight hadn't been occured */
         ArrayList<ArrayList<Integer>> club_straight_index = getStraightIndex(straight_clubs_value);
@@ -242,10 +242,10 @@ public class App {
         ArrayList<ArrayList<Integer>> diamond_straight_index = getStraightIndex(straight_diamond_value);
         ArrayList<ArrayList<Integer>> spade_straight_index = getStraightIndex(straight_spade_value);
         try {
-            System.out.println(club_straight_index);
-            System.out.println(heart_straight_index);
-            System.out.println(diamond_straight_index);
-            System.out.println(spade_straight_index);
+            // System.out.println(club_straight_index);
+            // System.out.println(heart_straight_index);
+            // System.out.println(diamond_straight_index);
+            // System.out.println(spade_straight_index);
             if ((club_straight_index == null) && (heart_straight_index == null) && (diamond_straight_index == null)
                     && (spade_straight_index == null)) {
 
@@ -262,22 +262,22 @@ public class App {
         int result_score = 0;
 
         /* check if can be banked in kind. */
-        System.out.println("W(TSPEHRE)" + kindList.get(getKindIndex(kindList_value).get(0).get(0)).getValue());
+        // System.out.println("W(TSPEHRE)" + kindList.get(getKindIndex(kindList_value).get(0).get(0)).getValue());
 
         for (int i = 0; i < deadwoodList.size(); i++) {
 
-            System.out.println("GETSCORE()::" + deadwoodList.get(i).getScore());
+            // System.out.println("GETSCORE()::" + deadwoodList.get(i).getScore());
             if (kindList.get(getKindIndex(kindList_value).get(0).get(0)).getValue() == deadwoodList.get(i).getValue()) {
                 /* if matched, deadwoodlist.remove(i) */
                 /* result_score = result_score + deadwoodLlist.getScore() */
-                System.out.println("GETSCORE()::" + deadwoodList.get(i).getScore());
+                // System.out.println("GETSCORE()::" + deadwoodList.get(i).getScore());
                 result_score += deadwoodList.remove(i).getScore();
 
             }
 
         }
 
-        System.out.println("LAYOFF_SCORE_IS::" + result_score);
+        // System.out.println("LAYOFF_SCORE_IS::" + result_score);
 
         /* check if can be banked in straight */
 
@@ -334,10 +334,10 @@ public class App {
         // Heart straight check , check if can be banked in straight heart.
         if (heart_straight_index != null) {
             /* has straight occured in heart */
-            System.out.println("HEART_STRAIGHT_INDEX is not null");
-            System.out.println("HEART_STRAIGHT_INDEX::SIZE::" + heart_straight_index.size());
+            // System.out.println("HEART_STRAIGHT_INDEX is not null");
+            // System.out.println("HEART_STRAIGHT_INDEX::SIZE::" + heart_straight_index.size());
             Collections.sort(straight_heart);
-            System.out.println(straight_heart);
+            // System.out.println(straight_heart);
             for (int j = 0; j < heart_straight_index.size(); j++) {
                 boolean isCombo = true;
                 int q = 0;
@@ -348,7 +348,7 @@ public class App {
                             .getValue() == deadwoodList.get(q).getValue() + 1)
                             && deadwoodList.get(q).getSuit().equals("h")) {
                         /* can be placed in the bottom of the straighted card */
-                        System.out.println("CAN BE PLACE IN THE BOTTOM OF THE STRAIGHT CARD" + deadwoodList.get(q));
+                        // System.out.println("CAN BE PLACE IN THE BOTTOM OF THE STRAIGHT CARD" + deadwoodList.get(q));
                         straight_heart.add(deadwoodList.get(q)); // Add deadwood card to bank of straight
                         straight_heart_value.add(deadwoodList.get(q).getValue()); // Add deadwood rank to bank value
                         Collections.sort(straight_heart);
@@ -363,8 +363,8 @@ public class App {
                     else if (straight_heart.get(heart_straight_index.get(j).get(heart_straight_index.get(j).size() - 1))
                             .getValue() == deadwoodList.get(q).getValue() - 1) {
                         /* can be placed at the upper of the straighted card */
-                        System.out.println("CAN BE PLACE AT THE UPPER OF THE STRAIGHT CARD" + deadwoodList.get(q));
-                        System.out.println("LEFT IN DEADWOOD::"+deadwoodList);
+                        // System.out.println("CAN BE PLACE AT THE UPPER OF THE STRAIGHT CARD" + deadwoodList.get(q));
+                        // System.out.println("LEFT IN DEADWOOD::"+deadwoodList);
                         straight_heart.add(deadwoodList.get(q));
                         straight_heart_value.add(deadwoodList.get(q).getValue());
                         Collections.sort(straight_heart);
