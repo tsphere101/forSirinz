@@ -9,32 +9,23 @@ public class App {
         /* TEST CASE */
 
         ArrayList<String> listOfKind_string = new ArrayList<String>();
-        listOfKind_string.add("1s");
         listOfKind_string.add("1d");
-        listOfKind_string.add("1d");
-        listOfKind_string.add("10c");
-        listOfKind_string.add("10s");
-        listOfKind_string.add("10d");
+        listOfKind_string.add("1c");
+        listOfKind_string.add("1h");
+
 
         ArrayList<String> listOfStraight_string = new ArrayList<String>();
-        listOfStraight_string.add("3s");
-        listOfStraight_string.add("4s");
-        listOfStraight_string.add("5s");
-
-        listOfStraight_string.add("os");
-        listOfStraight_string.add("ns");
-        listOfStraight_string.add("ps");
+        listOfStraight_string.add("5d");
+        listOfStraight_string.add("6d");
+        listOfStraight_string.add("7d");
 
         ArrayList<String> listOfDeadwood_string = new ArrayList<String>();
         listOfDeadwood_string.add("1s");
-        listOfDeadwood_string.add("2s");
-        listOfDeadwood_string.add("6s");
-        listOfDeadwood_string.add("7s");
-        listOfDeadwood_string.add("8s");
-        listOfDeadwood_string.add("9s");
-        listOfDeadwood_string.add("ms");
+        listOfDeadwood_string.add("3d");
+        listOfDeadwood_string.add("4d");
+        
 
-        // System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
+        System.out.println(layoffScore(listOfKind_string, listOfStraight_string, listOfDeadwood_string));
 
     }
 
@@ -487,6 +478,7 @@ public class App {
 
         }
 
+        System.out.println("LAYOFF_SCORE::"+result_score);
         return result_score;
     }
 
